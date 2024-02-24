@@ -1,0 +1,9 @@
+.card{
+    height:50vh;
+}
+.card-img-top{
+    max-height:200px;
+}
+.noUnderline {
+    text-decoration: none;
+}
