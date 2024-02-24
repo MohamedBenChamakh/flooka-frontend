@@ -1,6 +1,6 @@
-import React , { useState, useEffect }from 'react';
-import Card from '../../components/card/card';
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './live.css'
 const Live = () => {
   const [data, setData] = useState([]);
 
@@ -21,14 +21,18 @@ const Live = () => {
 
   return (
     <div className="live">
-      <div className="container">
-        <h3>Live</h3>
-        <div className='row d-flex justify-content-center'>
-          {data.map((card, index) => (
-            <div className='col-3' key={index}>
-              <Card imageUrl={card.imageUrl} title={card.title} text={card.description} _id={card._id} />
-            </div>
-          ))}
+      <div className="container ">
+        <div className='row'>
+          <div className='col-lg-6 mx-auto'>
+            <h3>Live</h3>
+            <ul class="list-group list-group-flush">
+              {data.map((card, index) => (
+                <li class="list-group-item" key={index}>
+                  <Link to={`/stream/${card._id}`} className="link"><img src={card.imageUrl} className='img-thumbnail me-3' />{card.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

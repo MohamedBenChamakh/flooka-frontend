@@ -46,7 +46,7 @@ const Stream = (streamUrl) => {
     <>
       {data && (
         <div className='row '>
-          <div className='col-8'>
+          <div className='col-lg-8 col-12'>
             {isHls ? (
               <ReactHlsPlayer
                 src={data.streamUrl}

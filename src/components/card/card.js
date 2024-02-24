@@ -8,7 +8,6 @@ const Card = ({ imageUrl, title, text, _id }) => (
       <img src={imageUrl} className="card-img-top " alt="..." />
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
-        <p className="card-text">{text}</p>
       </div>
     </div>
   </Link>
