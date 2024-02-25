@@ -26,7 +26,7 @@ const Stream = ({ stream }) => {
           ...prevState,
           data: stream,
           isHls: stream.streamUrl?.endsWith("m3u8"),
-          isFrame: stream.streamUrl && (stream.streamUrl.includes("elahmad") || stream.streamUrl.includes("aflam4you") || stream.streamUrl.includes("3rbcafee"))
+          isFrame: stream.streamUrl && (stream.streamUrl.includes("elahmad") || stream.streamUrl.includes("aflam4you") || stream.streamUrl.includes("3rbcafee") || stream.streamUrl.includes("livehdtv"))
         }));
         console.log(data)
       } catch (error) {
@@ -45,7 +45,7 @@ const Stream = ({ stream }) => {
         <div className='row '>
           <div className='col-12'>
             <div className='d-flex'>
-              <img src={data.imageUrl} className='img me-2' />
+              <img src={data.imageUrl} className='img me-2 mb-1' />
               <h4>{data.title}</h4>
             </div>
             {isHls ? (
@@ -61,7 +61,7 @@ const Stream = ({ stream }) => {
               (<ReactPlayer url={data.streamUrl} playing={true} controls={true} width="100%" height="80vh" />
               )}
           </div>
-          <div className='col'>
+          <div className='col d-none'>
             <h6>Programme</h6>
             <div className="program">
               <ul className="list-group">
