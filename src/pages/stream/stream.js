@@ -11,7 +11,7 @@ const convertDate = (dateString) => {
   return `${hours}:${minutes}`;
 }
 
-const Stream = ({stream}) => {
+const Stream = ({ stream }) => {
 
   const [streamData, setStreamData] = useState({
     data: null,
@@ -43,8 +43,11 @@ const Stream = ({stream}) => {
     <>
       {data && (
         <div className='row '>
-          <div className='col-lg-8 col-12'>
-
+          <div className='col-12'>
+            <div className='d-flex'>
+              <img src={data.imageUrl} className='img me-2' />
+              <h4>{data.title}</h4>
+            </div>
             {isHls ? (
               <ReactHlsPlayer
                 src={data.streamUrl}
@@ -59,11 +62,6 @@ const Stream = ({stream}) => {
               )}
           </div>
           <div className='col'>
-            <div className='d-flex'>
-              <img src={data.imageUrl} className='img me-2' />
-              <h3>{data.title}</h3>
-            </div>
-            <p>{data.description}</p>
             <h6>Programme</h6>
             <div className="program">
               <ul className="list-group">

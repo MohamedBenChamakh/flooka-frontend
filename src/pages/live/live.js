@@ -31,6 +31,7 @@ const Live = () => {
       <div className="container-fluid">
         <div className='row'>
           <div className='col-lg-3 menu'>
+            <h4>Tv Stream</h4>
             <ul className="list-group list-group-flush " >
               {data.map((channel, index) => (
                 <li className="list-group-item" key={index} onClick={() => streamLive(channel)}>
@@ -39,7 +40,7 @@ const Live = () => {
               ))}
             </ul>
           </div>
-          <div className='col'>
+          <div className='col live'>
           {stream && <Stream stream={stream} />}
           </div>
         </div>

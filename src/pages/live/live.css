@@ -22,12 +22,39 @@
 
 .menu {
     position: relative;
-    top: 5%;
+    top: 0;
     left: 0;
 }
 
+.live{
+    position: relative;
+    top: 2vh;
+}
+
 .menu ul {
-    height: 89vh; 
+    height: 92vh;
     overflow-y: auto;
     box-sizing: border-box;
-  }
+}
+
+.menu ul::-webkit-scrollbar {
+    width: 8px;
+    /* Set the width of the scrollbar */
+}
+
+.menu ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Set the background color of the scrollbar track */
+}
+
+.menu ul::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Set the color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Set the border radius of the scrollbar thumb */
+}
+
+.menu ul::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Set the color of the scrollbar thumb on hover */
+}
