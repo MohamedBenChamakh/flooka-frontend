@@ -4,11 +4,30 @@
     object-fit: scale-down;
 }
 
+
 .list-group-item {
     text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #efefef;
+    cursor: pointer;
 }
 
 .link {
     text-decoration: none;
     color: black;
 }
+
+.menu {
+    position: relative;
+    top: 5%;
+    left: 0;
+}
+
+.menu ul {
+    height: 89vh; 
+    overflow-y: auto;
+    box-sizing: border-box;
+  }

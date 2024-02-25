@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Stream from '../stream/stream'
 import './live.css'
 const Live = () => {
   const [data, setData] = useState([]);
+  const [stream, setStream] = useState(null);
+
+  const streamLive = (channel) => {
+    console.log(channel);
+    setStream(channel);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,17 +28,19 @@ const Live = () => {
 
   return (
     <div className="live">
-      <div className="container ">
+      <div className="container-fluid">
         <div className='row'>
-          <div className='col-lg-6 mx-auto'>
-            <h3>Live</h3>
-            <ul class="list-group list-group-flush">
-              {data.map((card, index) => (
-                <li class="list-group-item" key={index}>
-                  <Link to={`/stream/${card._id}`} className="link"><img src={card.imageUrl} className='img-thumbnail me-3' />{card.title}</Link>
+          <div className='col-lg-3 menu'>
+            <ul className="list-group list-group-flush " >
+              {data.map((channel, index) => (
+                <li className="list-group-item" key={index} onClick={() => streamLive(channel)}>
+                    <img src={channel.imageUrl} className='img-thumbnail me-3' />{channel.title}
                 </li>
               ))}
             </ul>
+          </div>
+          <div className='col'>
+          {stream && <Stream stream={stream} />}
           </div>
         </div>
       </div>

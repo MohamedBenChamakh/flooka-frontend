@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
-import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player'
-import XMLParser from 'react-xml-parser';
 import './stream.css';
 
 
@@ -13,33 +11,32 @@ const convertDate = (dateString) => {
   return `${hours}:${minutes}`;
 }
 
-const Stream = (streamUrl) => {
-  const { id } = useParams();
+const Stream = ({stream}) => {
 
   const [streamData, setStreamData] = useState({
     data: null,
     isHls: false,
+    isFrame: false,
   });
-  const { data, isHls  } = streamData;
+  const { data, isHls, isFrame } = streamData;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (id) {
-          const response = await fetch(`http://localhost:8080/live/${id}`);
-          const jsonData = await response.json();
-          setStreamData(prevState => ({
-            ...prevState,
-            data: jsonData,
-            isHls: jsonData.streamUrl?.endsWith("m3u8"),
-          }));
-        }
+        setStreamData(prevState => ({
+          ...prevState,
+          data: stream,
+          isHls: stream.streamUrl?.endsWith("m3u8"),
+          isFrame: stream.streamUrl && (stream.streamUrl.includes("elahmad") || stream.streamUrl.includes("aflam4you") || stream.streamUrl.includes("3rbcafee"))
+        }));
+        console.log(data)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [id])
+
+  }, [stream])
 
 
   return (
@@ -47,6 +44,7 @@ const Stream = (streamUrl) => {
       {data && (
         <div className='row '>
           <div className='col-lg-8 col-12'>
+
             {isHls ? (
               <ReactHlsPlayer
                 src={data.streamUrl}
@@ -55,9 +53,10 @@ const Stream = (streamUrl) => {
                 width="100%"
                 height="auto"
               />
-            ) : (
-              <ReactPlayer url={data.streamUrl} playing={true}  width="100%" height="80vh" />
-            )}
+            ) : isFrame ?
+              (<iframe width="100%" style={{ height: '80vh', border: 'none' }} src={data.streamUrl} allowFullScreen allow="autoplay; fullscreen; picture-in-picture;  encrypted-media"></iframe>) :
+              (<ReactPlayer url={data.streamUrl} playing={true} controls={true} width="100%" height="80vh" />
+              )}
           </div>
           <div className='col'>
             <div className='d-flex'>
@@ -68,7 +67,7 @@ const Stream = (streamUrl) => {
             <h6>Programme</h6>
             <div className="program">
               <ul className="list-group">
-                {data && data.program && data.program.length>0 ? data.program.map((program, index) => (
+                {data && data.program && data.program.length > 0 ? data.program.map((program, index) => (
                   <small key={index}>
                     <li className="list-group-item"><b>{program.title[0]._}</b>  {convertDate(program.$.start)}-{convertDate(program.$.stop)}</li>
                   </small>
@@ -76,7 +75,7 @@ const Stream = (streamUrl) => {
               </ul>
             </div>
           </div>
-        </div>
+        </div >
       )}
     </>
   );
