@@ -37,7 +37,7 @@ const Live = () => {
       <div className="container-fluid">
         <div className='row'>
           <div className='col-lg-3 menu'>
-            <h4 className="text-center">Tv Stream</h4>
+            <h4 className="text-center"><img src="../logo.jpg" width="75" /></h4>
             <ul className="list-group list-group-flush " >
               {data.map((channel, index) => (
                 <li className="list-group-item" key={index} onClick={() => streamLive(channel)}>

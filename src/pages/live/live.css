@@ -32,7 +32,7 @@
 }
 
 .menu ul {
-    height: 92vh;
+    height: 84vh;
     overflow-y: auto;
     box-sizing: border-box;
 }
