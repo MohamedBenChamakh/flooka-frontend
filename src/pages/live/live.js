@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Stream from '../stream/stream'
 import './live.css'
-import config from '../../config';
 
 const Live = () => {
   const [data, setData] = useState([]);
@@ -16,7 +15,7 @@ const Live = () => {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await fetch(config.SERVER_URI + '/live');
+        const response = await fetch(process.env.SERVER_URI + '/live');
         const jsonData = await response.json();
         setData(jsonData); // Assuming your API returns an array of objects similar to your sample data
       } catch (error) {
