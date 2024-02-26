@@ -36,7 +36,7 @@ const Stream = ({ stream }) => {
 
     fetchData();
 
-  }, [stream])
+  }, [stream,data])
 
 
   return (
@@ -45,7 +45,7 @@ const Stream = ({ stream }) => {
         <div className='row '>
           <div className='col-12'>
             <div className='d-flex'>
-              <img src={data.imageUrl} className='img me-2 mb-1' />
+              <img src={data.imageUrl} className='img me-2 mb-1' alt={data.title} />
               <h4>{data.title}</h4>
             </div>
             {isHls ? (
@@ -57,7 +57,7 @@ const Stream = ({ stream }) => {
                 height="auto"
               />
             ) : isFrame ?
-              (<iframe width="100%" style={{ height: '80vh', border: 'none' }} src={data.streamUrl} allowFullScreen allow="autoplay; fullscreen; picture-in-picture;  encrypted-media"></iframe>) :
+              (<iframe width="100%" title={data.title} style={{ height: '80vh', border: 'none' }} src={data.streamUrl} allowFullScreen allow="autoplay; fullscreen; picture-in-picture;  encrypted-media"></iframe>) :
               (<ReactPlayer url={data.streamUrl} playing={true} controls={true} width="100%" height="80vh" />
               )}
           </div>

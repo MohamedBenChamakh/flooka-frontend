@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Stream from '../stream/stream'
 import './live.css'
 
+
+if(!process.env.REACT_APP_SERVER_URI){
+  console.error("Please add SERVER_URI env var in your file")
+}
+
 const Live = () => {
   const [data, setData] = useState([]);
   const [stream, setStream] = useState(null);
@@ -15,11 +20,11 @@ const Live = () => {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await fetch(process.env.SERVER_URI + '/live');
+        const response = await fetch(process.env.REACT_APP_SERVER_URI + '/live');
         const jsonData = await response.json();
         setData(jsonData); // Assuming your API returns an array of objects similar to your sample data
       } catch (error) {
-        console.log(process.env.SERVER_URI)
+        console.log(process.env.REACT_APP_SERVER_URI)
         console.error('Error fetching data:', error);
       }
     };
@@ -36,7 +41,7 @@ const Live = () => {
             <ul className="list-group list-group-flush " >
               {data.map((channel, index) => (
                 <li className="list-group-item" key={index} onClick={() => streamLive(channel)}>
-                  <img src={channel.imageUrl} className='img-thumbnail me-3' />{channel.title}
+                  <img src={channel.imageUrl} className='img-thumbnail me-3' alt={channel.title} />{channel.title}
                 </li>
               ))}
             </ul>
