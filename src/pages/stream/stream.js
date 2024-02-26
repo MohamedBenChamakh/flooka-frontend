@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
 import ReactPlayer from 'react-player'
+import { useParams } from 'react-router-dom';
 import './stream.css';
 
 
@@ -12,7 +13,7 @@ const convertDate = (dateString) => {
 }
 
 const Stream = ({ stream }) => {
-
+  let { id } = useParams();
   const [streamData, setStreamData] = useState({
     data: null,
     isHls: false,
@@ -22,13 +23,16 @@ const Stream = ({ stream }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (stream == null && id) {
+          const response = await fetch(process.env.REACT_APP_SERVER_URI + `/live/${id}`);
+          stream = await response.json();
+        }
         setStreamData(prevState => ({
           ...prevState,
           data: stream,
           isHls: stream.streamUrl?.endsWith("m3u8"),
           isFrame: stream.streamUrl && (stream.streamUrl.includes("elahmad") || stream.streamUrl.includes("aflam4you") || stream.streamUrl.includes("3rbcafee") || stream.streamUrl.includes("livehdtv"))
         }));
-        console.log(data)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -36,7 +40,7 @@ const Stream = ({ stream }) => {
 
     fetchData();
 
-  }, [stream,data])
+  }, [stream, id])
 
 
   return (
@@ -44,10 +48,10 @@ const Stream = ({ stream }) => {
       {data && (
         <div className='row '>
           <div className='col-12'>
-            <div className='d-flex'>
-              <img src={data.imageUrl} className='img me-2 mb-1' alt={data.title} />
-              <h4>{data.title}</h4>
-            </div>
+              <div className='d-flex m-1'>
+                <img src={data.imageUrl} className='img me-2 mb-1' alt={data.title} />
+                <h4>{data.title}</h4>
+              </div>
             {isHls ? (
               <ReactHlsPlayer
                 src={data.streamUrl}

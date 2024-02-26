@@ -36,6 +36,10 @@
     overflow-y: auto;
     box-sizing: border-box;
 }
+li.link{
+    text-decoration: none;
+
+}
 
 .menu ul::-webkit-scrollbar {
     width: 8px;
