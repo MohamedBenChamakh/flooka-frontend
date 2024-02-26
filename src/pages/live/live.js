@@ -19,6 +19,7 @@ const Live = () => {
         const jsonData = await response.json();
         setData(jsonData); // Assuming your API returns an array of objects similar to your sample data
       } catch (error) {
+        console.log(process.env.SERVER_URI)
         console.error('Error fetching data:', error);
       }
     };
