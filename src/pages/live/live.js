@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Stream from '../stream/stream'
 import './live.css'
 const Live = () => {
@@ -15,7 +14,7 @@ const Live = () => {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await fetch('http://localhost:8080/live');
+        const response = await fetch(process.env.SERVER_URI + '/live');
         const jsonData = await response.json();
         setData(jsonData); // Assuming your API returns an array of objects similar to your sample data
       } catch (error) {
@@ -35,13 +34,13 @@ const Live = () => {
             <ul className="list-group list-group-flush " >
               {data.map((channel, index) => (
                 <li className="list-group-item" key={index} onClick={() => streamLive(channel)}>
-                    <img src={channel.imageUrl} className='img-thumbnail me-3' />{channel.title}
+                  <img src={channel.imageUrl} className='img-thumbnail me-3' />{channel.title}
                 </li>
               ))}
             </ul>
           </div>
           <div className='col live'>
-          {stream && <Stream stream={stream} />}
+            {stream && <Stream stream={stream} />}
           </div>
         </div>
       </div>
