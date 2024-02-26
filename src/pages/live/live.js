@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Stream from '../stream/stream'
 import './live.css'
-import config from './config';
+import config from '../../config';
 
 const Live = () => {
   const [data, setData] = useState([]);
