@@ -59,7 +59,13 @@ const Live = () => {
             </ul>
           </div>
           <div className='col live d-none d-lg-block'>
-            {stream && <Stream stream={stream} />}
+            {stream ? ( <Stream stream={stream} />) :(
+              <div className='row mt-5'>
+                <h3>Welcome to Flooka TV</h3>
+                <p className="text-muted">Watch free live TV channels online in your browser.</p>
+                <p className="text-muted" dir="rtl">تحية طيبة، ندعوكم جميعًا لدعم فلسطين في هذه الأوقات الصعبة. تحتاج فلسطين إلى دعمنا وتضامننا لمواجهة التحديات التي تواجهها. دعونا نقف معًا في وجه الظلم ونساند الشعب الفلسطيني في نضاله من أجل العدالة والسلام. #SupportPalestine <img src="https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQKAOsOQla26GPzlUjZQh_OGjvd_DNwPY2wHPgipKmn7Lw9NIFzCkPPEiLjJz4zFZg2" width="50" alt="palestine flag" /></p>
+              </div>
+            )}
           </div>
         </div>
       </div>
