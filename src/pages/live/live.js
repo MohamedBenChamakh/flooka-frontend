@@ -20,7 +20,7 @@ const Live = () => {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await fetch(process.env.REACT_APP_SERVER_URI + '/api/live');
+        const response = await fetch(process.env.REACT_APP_SERVER_URI + '/live');
         const jsonData = await response.json();
         setData(jsonData); // Assuming your API returns an array of objects similar to your sample data
       } catch (error) {
